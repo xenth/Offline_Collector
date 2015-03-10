@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]>    <html class="no-js iem7"> <![endif]-->
+<!--[if (gt IEMobile 7)|!(IEMobile)]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <title>Offline Contact and Genealogy Application</title>
+        <meta name="description" content="">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="cleartype" content="on">
+
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/touch/apple-touch-icon-144x144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/touch/apple-touch-icon-114x114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/touch/apple-touch-icon-72x72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="img/touch/apple-touch-icon-57x57-precomposed.png">
+        <link rel="shortcut icon" href="img/touch/apple-touch-icon.png">
+
+        <!-- Tile icon for Win8 (144x144 + tile color) -->
+        <meta name="msapplication-TileImage" content="img/touch/apple-touch-icon-144x144-precomposed.png">
+        <meta name="msapplication-TileColor" content="#222222">
+
+
+        <!-- This script prevents links from opening in Mobile Safari. https://gist.github.com/1042026 -->
+        <!--
+        <script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone")</script>
+        -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+        <link rel="stylesheet" href="css/foundation.css" />
+        <script src="js/vendor/modernizr.js"></script>
+    </head>
+    <body>
+    <!-- Add your site or application content here -->
+    <form>
+    <div class="row"><!-- Welcome -->
+      <div class="large-8 medium-8 columns panel">
+        <h4>Welcome to the Family Database Offline Collector!</h4>
+        <p>Please choose your name from below.  If you cannot find your name, please choose "New Person" at the end of the list.</p>
+            <div class="large-8 columns">
+                <label>Please select you name:</label>
+                <select>
+                    <option value="">Please Make Selection from DB</option>
+                    <option value="New Person">New Person</option>
+                </select>
+            </div>
+            <div class="large-4 medium-4 columns">
+                  <a href="#" class="small round button">Enter or Update Contact Information</a>
+            </div>
+      </div>
+    </div>
+    <div class="row"><!-- Contact -->
+      <div class="large-8 medium-8 columns panel">
+        <p>Please use full legal names.  If possible, please enter your email address.</p>
+            <div class="row">
+              <div class="large-4 medium-4 columns">
+                <label>First Name</label>
+                <input type="text" placeholder="First" name="first" />
+              </div>
+              <div class="large-4 medium-4 columns">
+                <label>Middle Name</label>
+                <input type="text" placeholder="Middle" name="middle"/>
+              </div>
+              <div class="large-4 medium-4 columns">
+                <div class="row collapse">
+                  <label>Last Name</label>
+                  <div class="small-9 columns">
+                    <input type="text" placeholder="Last" name="last" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-4 medium-4 columns">
+                <label>Preferred Name</label>
+                <input type="text" placeholder="Deb, Jim, Kim, Mike, Sandy" name="used_name" />
+              </div>
+              <div class="large-4 medium-4 columns">
+                <label>Suffix</label>
+                <select name="suffix">
+                  <option value="">None</option>
+                  <option value="I">I, Senior</option>
+                  <option value="II">Junior</option>
+                  <option value="III">The Third</option>
+                  <option value="IV">The Fourth</option>
+                  <option value="V">The Fifth</option>
+                  <option value="VI">The Sixth</option>
+                  <option value="VII">The Seventh</option>
+                  <option value="VIII">The Eighth</option>
+                  <option value="IX">The Ninth</option>
+                  <option value="X">The Tenth</option>
+                </select>
+              </div>
+              <div class="large-4 medium-4 columns">
+                <div class="row collapse">
+                  <label>Maiden Name</label>
+                  <div class="small-9 columns">
+                    <input type="text" placeholder="Maiden" name="maiden" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-12 columns">
+                <label>Email Address (Our main method of communication)</label>
+                <input type="text" placeholder="example@company.com" name="email" />
+              </div>
+            </div>
+            <div class="large-4 medium-4 columns">
+                  <a href="#" class="small round button">Take Photo</a>
+            </div>
+            <div class="large-4 medium-4 columns">
+                  <a href="#" class="small round button">Mailing Information ></a>
+            </div>
+      </div>
+    </div>
+    <div class="row"><!-- Mailing Address -->
+      <div class="large-8 medium-8 columns panel">
+        <p>Please enter your mailing address.</p>
+            <div class="row">
+              <div class="large-6 columns">
+                <label>Mailing Address 1</label>
+                <input type="text" placeholder="Mailing Address" name="add1" />
+              </div>
+              <div class="large-6 columns">
+                <label>Mailing Address 2</label>
+                <input type="text" placeholder="#4, Apartment B" name="add2" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-4 medium-4 columns">
+                <label>City:</label>
+                <input type="text" placeholder="Metrotownshire" name="city" />
+              </div>
+              <div class="large-4 medium-4 columns">
+                <label>State:</label>
+                <select name="state">
+                    <option value="">Choose</option>
+                    <option value="AL">AL</option>
+                    <option value="AK">AK</option>
+                    <option value="AZ">AZ</option>
+                    <option value="AR">AR</option>
+                    <option value="CA">CA</option>
+                    <option value="CO">CO</option>
+                    <option value="CT">CT</option>
+                    <option value="DE">DE</option>
+                    <option value="DC">DC</option>
+                    <option value="FL">FL</option>
+                    <option value="GA">GA</option>
+                    <option value="HI">HI</option>
+                    <option value="ID">ID</option>
+                    <option value="IL">IL</option>
+                    <option value="IN">IN</option>
+                    <option value="IA">IA</option>
+                    <option value="KS">KS</option>
+                    <option value="KY">KY</option>
+                    <option value="LA">LA</option>
+                    <option value="ME">ME</option>
+                    <option value="MD">MD</option>
+                    <option value="MA">MA</option>
+                    <option value="MI">MI</option>
+                    <option value="MN">MN</option>
+                    <option value="MS">MS</option>
+                    <option value="MO">MO</option>
+                    <option value="MT">MT</option>
+                    <option value="NE">NE</option>
+                    <option value="NV">NV</option>
+                    <option value="NH">NH</option>
+                    <option value="NJ">NJ</option>
+                    <option value="NM">NM</option>
+                    <option value="NY">NY</option>
+                    <option value="NC">NC</option>
+                    <option value="ND">ND</option>
+                    <option value="OH">OH</option>
+                    <option value="OK">OK</option>
+                    <option value="OR">OR</option>
+                    <option value="PA">PA</option>
+                    <option value="RI">RI</option>
+                    <option value="SC">SC</option>
+                    <option value="SD">SD</option>
+                    <option value="TN">TN</option>
+                    <option value="TX">TX</option>
+                    <option value="UT">UT</option>
+                    <option value="VT">VT</option>
+                    <option value="VA">VA</option>
+                    <option value="WA">WA</option>
+                    <option value="WV">WV</option>
+                    <option value="WI">WI</option>
+                    <option value="WY">WY</option>
+                </select>
+              </div>
+              <div class="large-4 medium-4 columns">
+                <div class="row collapse">
+                  <label>ZIP Code:</label>
+                  <div class="small-9 columns">
+                    <input type="text" placeholder="55555-4444" name="zip" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="large-4 medium-4 columns">
+                  <a href="#" class="small round button">Take Photo</a>
+            </div>
+            <div class="large-6 medium-6 columns">
+                  <a href="#" class="small round button">Genealogy Information ></a>
+            </div>
+      </div>
+    </div>
+    <div class="row"><!-- Genealogy 1 of 2-->
+      <div class="large-8 medium-8 columns panel">
+        <p>This is to capture genealogy information.  Please fill in as completely as you can.</p>
+        <div class="row">
+            <div class="medium-3 columns">
+                <label>Date of Birth:</label>
+                <select id="bmonth" name="bmonth">
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+            </div>
+            <div class="medium-2 columns">
+                <label>&nbsp;</label>
+                <select id="bday" name="bday">
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                </select>
+            </div>
+            <div class="medium-2 columns">
+                <label>&nbsp;</label>
+                <select id="byear" name="byear"></select>
+            </div>
+            <div class="medium-2 columns">
+                <label>&nbsp;</label>
+                <input type="text" placeholder="14:00:00" name="btime" />
+            </div>
+            <div class="large-3 medium-3 columns">
+              <label>Place of Birth:</label>
+              <input type="text" placeholder="Town, State, Country" name="place_of_birth" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="medium-3 columns">
+              <label>Date of Death:</label>
+              <select id="dmonth" name="dmonth">
+                  <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+            </div>
+            <div class="medium-2 columns">
+                <label>&nbsp;</label>
+                <select id="dday" name="dday">
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+              </select>
+            </div>
+            <div class="medium-2 columns">
+                <label>&nbsp;</label>
+                <select id="dyear" name="dyear"></select>
+            </div>
+            <div class="medium-2 columns">
+                <label>&nbsp;</label>
+                <input type="text" placeholder="14:00:00" name="dtime" />
+            </div>
+            <div class="large-3 medium-3 columns">
+                <label>Location</label>
+                <input type="text" placeholder="City, ST, County" name="dlocation" />
+            </div>
+          </div>
+        <div class="row">
+          <div class="large-6 columns">
+              <label>Mother</label>
+              <select>
+                  <option value="">Please Make Selection from DB</option>
+              </select>
+          </div>
+          <div class="large-6 columns">
+            <label>Father</label>
+            <select>
+              <option value="">Please Make Selection from DB</option>
+            </select>
+          </div>
+                        <div class="large-4 medium-4 columns">
+                  <a href="#" class="small round button">Take Photo</a>
+            </div>
+            <div class="large-6 medium-6 columns">
+                  <a href="#" class="small round button">Genealogy Information ></a>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="row"><!-- Genealogy 3 of 3-->
+      <div class="large-8 medium-8 columns panel">
+        <div class="row">
+            <div class="large-8 medium-8 columns">
+                <label>Spouse:</label>
+                <select name="spouse">
+                    <option value="">Please Make Selection from DB</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="medium-3 columns">
+                <label>Anniversary:</label>
+                <select id="amonth" name="amonth">
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+            </div>
+            <div class="medium-2 columns">
+                <label>&nbsp;</label>
+                <select id="aday" name="aday">
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                </select>
+            </div>
+            <div class="medium-2 columns">
+                <label>&nbsp;</label>
+                <select id="ayear" name="ayear"></select>
+            </div>
+            <div class="medium-2 columns">
+                <label>&nbsp;</label>
+                <input type="text" placeholder="14:00:00" name="atime" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="large-12 columns">
+              <label>Notes</label>
+              <textarea placeholder="Place married, interesting story, little known facts"></textarea>
+            </div>
+          </div>
+          <div class="row">
+              <div class="large-4 medium-4 columns">
+                  <a href="#" class="small round button">Take Photo</a>
+              </div>
+              <div class="large-4 medium-4 columns">
+                  <a href="#" class="small round button">Submit Information</a>
+              </div>
+          </div>
+       </div>
+       </form>
+
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+        <!-- End your site or application content here -->
+
+        <script src="js/vendor/zepto.min.js"></script>
+        <script src="js/helper.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            var _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"]];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+            g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
+            s.parentNode.insertBefore(g,s)}(document,"script"));
+        </script>
+    </body>
+</html>

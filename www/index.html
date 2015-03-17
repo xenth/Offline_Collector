@@ -31,12 +31,14 @@
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
         <link rel="stylesheet" href="css/foundation.css" />
         <script src="js/vendor/modernizr.js"></script>
+        <script src="js/Block_Array_HideShowClear.js"></script>
     </head>
-    <body>
+    <body onload="Block_Array_HideShowClear(new Array('thanks', 'contact', 'mailing', 'genealogy1', 'genealogy2'), new Array(''), 'hide');">
     <!-- Add your site or application content here -->
     <form>
-    <div class="row"><!-- Welcome -->
+    <div class="row" id="welcome"><!-- Welcome -->
       <div class="large-8 medium-8 columns panel">
+          <h4 style="color:red" id="thanks">Thank you for contributing!  I really appreciate it!</h4>
         <h4>Welcome to the Family Database Offline Collector!</h4>
         <p>Please choose your name from below.  If you cannot find your name, please choose "New Person" at the end of the list.</p>
             <div class="large-8 columns">
@@ -47,11 +49,11 @@
                 </select>
             </div>
             <div class="large-4 medium-4 columns">
-                  <a href="#" class="small round button">Enter or Update Contact Information</a>
+                <a href="#" class="small round button" onclick="Block_Array_HideShowClear(new Array('welcome'), new Array(''), 'hide'); Block_Array_HideShowClear(new Array('contact'), new Array(''), 'show');">Enter or Update Contact Information</a>
             </div>
       </div>
     </div>
-    <div class="row"><!-- Contact -->
+    <div class="row" id="contact"><!-- Contact -->
       <div class="large-8 medium-8 columns panel">
         <p>Please use full legal names.  If possible, please enter your email address.</p>
             <div class="row">
@@ -112,11 +114,11 @@
                   <a href="#" class="small round button">Take Photo</a>
             </div>
             <div class="large-4 medium-4 columns">
-                  <a href="#" class="small round button">Mailing Information ></a>
+                  <a href="#" class="small round button" onclick="Block_Array_HideShowClear(new Array('contact'), new Array(''), 'hide'); Block_Array_HideShowClear(new Array('mailing'), new Array(''), 'show');">Mailing Information ></a>
             </div>
       </div>
     </div>
-    <div class="row"><!-- Mailing Address -->
+    <div class="row" id="mailing"><!-- Mailing Address -->
       <div class="large-8 medium-8 columns panel">
         <p>Please enter your mailing address.</p>
             <div class="row">
@@ -204,11 +206,11 @@
                   <a href="#" class="small round button">Take Photo</a>
             </div>
             <div class="large-6 medium-6 columns">
-                  <a href="#" class="small round button">Genealogy Information ></a>
+                  <a href="#" class="small round button"  onclick="Block_Array_HideShowClear(new Array('mailing'), new Array(''), 'hide'); Block_Array_HideShowClear(new Array('genealogy1'), new Array(''), 'show');">Genealogy Information ></a>
             </div>
       </div>
     </div>
-    <div class="row"><!-- Genealogy 1 of 2-->
+    <div class="row" id="genealogy1"><!-- Genealogy 1 of 2-->
       <div class="large-8 medium-8 columns panel">
         <p>This is to capture genealogy information.  Please fill in as completely as you can.</p>
         <div class="row">
@@ -362,12 +364,12 @@
                   <a href="#" class="small round button">Take Photo</a>
             </div>
             <div class="large-6 medium-6 columns">
-                  <a href="#" class="small round button">Genealogy Information ></a>
+                  <a href="#" class="small round button" onclick="Block_Array_HideShowClear(new Array('genealogy1'), new Array(''), 'hide'); Block_Array_HideShowClear(new Array('genealogy2'), new Array(''), 'show');">Genealogy Information ></a>
             </div>
         </div>
       </div>
     </div>
-    <div class="row"><!-- Genealogy 3 of 3-->
+    <div class="row" id="genealogy2"><!-- Genealogy 2 of 2-->
       <div class="large-8 medium-8 columns panel">
         <div class="row">
             <div class="large-8 medium-8 columns">
@@ -451,11 +453,12 @@
                   <a href="#" class="small round button">Take Photo</a>
               </div>
               <div class="large-4 medium-4 columns">
-                  <a href="#" class="small round button">Submit Information</a>
+                  <a href="#" class="small round button" onclick="Block_Array_HideShowClear(new Array('genealogy2'), new Array(''), 'hide'); Block_Array_HideShowClear(new Array('welcome', 'thanks'), new Array(''), 'show');">Submit Information</a>
               </div>
           </div>
        </div>
-       </form>
+    </div>
+    </form>
 
     <script src="js/vendor/jquery.js"></script>
     <script src="js/foundation.min.js"></script>

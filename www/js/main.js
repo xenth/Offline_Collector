@@ -34,19 +34,29 @@ var peopleDB = [];
 var pageOrder = [ "#welcome", "#contact", "#mailing", "#genealogy1", "#genealogy2" ];
 var currentPage = 0;
 
-function onDeviceReady() {
+function onDeviceReady()
+{
     // Now safe to use device APIs
+    document.addEventListener("backbutton", onBackKeyDown, false);
+
     console.log("Resolving File URL");
     var dataFile = cordova.file.externalDataDirectory + '/OfflineCollector.tsv';
     window.resolveLocalFileSystemURL(dataFile, gotFileEntry, fail);
 }
 
-function gotFileEntry(fileEntry) {
+function onBackKeyDown()
+{
+    prevPage();
+}
+
+function gotFileEntry(fileEntry)
+{
     console.log("Requesting File from FileEntry");
     fileEntry.file(parsePeopleFile, fail);
 }
 
-function parsePeopleFile(file){
+function parsePeopleFile(file)
+{
     console.log("Reading file");
     var reader = new FileReader();
     reader.onloadend = function(evt) {
@@ -56,7 +66,8 @@ function parsePeopleFile(file){
     reader.readAsText(file);
 }
 
-function fail(error) {
+function fail(error)
+{
     console.log("Failed: " + error.code);
 }
 
@@ -120,6 +131,14 @@ function nextPage()
 
 function prevPage()
 {
+    if (currentPage <= 0 ) {
+        console.log("Can't go to previous page.  Already on " + currentPage);
+        return;
+    }
+    $(pageOrder[currentPage]).hide();
+    currentPage--;
+    $(pageOrder[currentPage]).show();
+    console.log("New page is " + pageOrder[currentPage]);
 }
 
 function startPerson()

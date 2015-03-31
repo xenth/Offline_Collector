@@ -62,6 +62,7 @@ var Person = {
 
 // Global list of people
 var peopleDB = [];
+var currentPersonId = '';
 
 // Pages in the editing flow
 var pageOrder = [ "#welcome", "#contact", "#mailing", "#genealogy1", "#genealogy2" ];
@@ -191,23 +192,27 @@ function startPerson()
     fillPeopleList("#person_father", false, 'M');
     fillPeopleList("#person_mother", false, 'F');
     fillPeopleList("#person_spouse", false, '');
+    var person = null;
     if (selected != "New Person") {
-        var person = peopleDB[selected];
+        person = peopleDB[selected];
         if (!person) {
             console.log("Unable to find person in personDB for " + selected);
             alert("Something went wrong.  Please create a new person or restart the app.");
             return;
         }
-        for (var key in person) {
-            if (!person.hasOwnProperty(key)) {
-                continue;
-            }
-            id = "#person_" + key;
-            console.log("Setting " + id + " for " + key);
-            $(id).val(person[key]);
-        }
     } else {
         console.log("Creating a new person");
+        person = Object.create(Person);
+    }
+
+    currentPersonId = person.id();
+    for (var key in person) {
+        if (typeof person[key] == "function") {
+            continue;
+        }
+        id = "#person_" + key;
+        console.log("Setting " + id + "=" + person[key] + " for " + key);
+        $(id).val(person[key]);
     }
     nextPage();
 }

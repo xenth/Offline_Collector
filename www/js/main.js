@@ -200,6 +200,7 @@ function startPerson()
     fillPeopleList("#person_father", false, 'M');
     fillPeopleList("#person_mother", false, 'F');
     fillPeopleList("#person_spouse", false, '');
+    $("#photo").attr('src', '');
     var person = null;
     if (selected != "New Person") {
         person = peopleDB[selected];
@@ -208,6 +209,7 @@ function startPerson()
             alert("Something went wrong.  Please create a new person or restart the app.");
             return;
         }
+        loadPersonPhoto(person);
     } else {
         console.log("Creating a new person");
         person = Object.create(Person);
@@ -227,15 +229,7 @@ function startPerson()
 
 function savePerson()
 {
-    var person = Object.create(Person);
-    for (var key in person) {
-        if (typeof person[key] == "function") {
-            continue;
-        }
-        id = "#person_" + key;
-        person[key] = $(id).val();
-        console.log("Setting " + key + "=" + person[key] + " from " + id);
-    }
+    var person = gatherPersonFields();
     if (currentPersonId && currentPersonId != person.id()) {
         console.log("Deleting entry for " + currentPersonId);
         delete peopleDB[currentPersonId];
@@ -247,6 +241,20 @@ function savePerson()
     fillPeopleList("#PeopleList", true, '');
     gotoPage(0);
     $("#thanks").show();
+}
+
+function gatherPersonFields()
+{
+    var person = Object.create(Person);
+    for (var key in person) {
+        if (typeof person[key] == "function") {
+            continue;
+        }
+        id = "#person_" + key;
+        person[key] = $(id).val();
+        console.log("Setting " + key + "=" + person[key] + " from " + id);
+    }
+    return person;
 }
 
 function saveDbFile()
@@ -287,4 +295,59 @@ function createCsvFromDb()
     }
 
     return output;
+}
+
+function takePhoto()
+{
+    var person = gatherPersonFields();
+    navigator.camera.getPicture(function(imageData) {
+        console.log("Got photo data of size " + imageData.length);
+        $("#photo").attr("src", "data:image/jpeg;base64," + imageData);
+        savePhoto(imageData, person.id());
+    },
+    function(message) {
+        console.log("Unable to take photo: " + message);
+        alert("Unable to get photo: " + message);
+    }, {
+        quality: 80,
+        destinationType: Camera.DestinationType.DATA_URL
+    });
+}
+
+function savePhoto(imageData, filename)
+{
+    console.log("Starting save of " + imageData.length + " bytes of image data to " + filename);
+    window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory, function(dirEntry) {
+        console.log("Got DirEntry: ", dirEntry);
+        dirEntry.getFile(filename + '.jpg', {create:true}, function(fileEntry) {
+            console.log("Got FileEntry: ", fileEntry);
+            fileEntry.createWriter(function(writer) {
+                var blob = base64toBlob(imageData, 'image/jpeg');
+                console.log("Writing " + blob.size + " bytes to file.");
+                writer.write(blob);
+            });
+        });
+    });
+}
+
+function base64toBlob(base64Data, contentType) {
+    var sliceSize = 1024;
+    var byteCharacters = atob(base64Data);
+    var bytes = new Array[byteCharacters.length];
+    for (var i=0; i<byteCharacters.length; i++) {
+        bytes[i] = byteCharacters[i].charCodeAt(0);
+    }
+    return new Blob([bytes], { type: contentType });
+}
+
+function loadPersonPhoto(person)
+{
+    var imgPath = cordova.file.externalDataDirectory + '/' + person.id() + '.jpg';
+    $("#photo").attr('src', imgPath);
+
+    window.resolveLocalFileSystemURL(imgPath, function(fileEntry) {
+        console.log("Got FileEntry: ", fileEntry);
+        fileEntry.file(function(file) {
+        });
+    });
 }

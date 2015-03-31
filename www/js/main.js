@@ -72,6 +72,11 @@ function onDeviceReady()
     // Now safe to use device APIs
     document.addEventListener("backbutton", onBackKeyDown, false);
 
+    loadPeopleDb();
+}
+
+function loadPeopleDb()
+{
     console.log("Resolving File URL");
     var dataFile = cordova.file.externalDataDirectory + '/OfflineCollector.tsv';
     window.resolveLocalFileSystemURL(dataFile, gotFileEntry, fail);

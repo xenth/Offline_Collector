@@ -33,7 +33,6 @@
         <script src="js/vendor/modernizr.js"></script>
         <script src="js/Block_Array_HideShowClear.js"></script>
     </head>
-    <!-- <body onload="Block_Array_HideShowClear(new Array('thanks', 'contact', 'mailing', 'genealogy1', 'genealogy2'), new Array('welcome'), 'hide');"> -->
     <body>
     <!-- Add your site or application content here -->
     <form>
@@ -46,6 +45,9 @@
                 <label>Please select your name:</label>
                 <select id="PeopleList">
                 </select>
+            </div>
+            <div class="large-4 medium-4 columns">
+                <a href="#" class="small round button" onclick="loadPeopleDb()">Reload Database</a>
             </div>
             <div class="large-4 medium-4 columns">
                 <a href="#" class="small round button" onclick="startPerson()">Enter or Update Contact Information</a>

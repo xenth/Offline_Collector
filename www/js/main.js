@@ -39,7 +39,7 @@ var Person = {
     displayName: function() {
         var name = this.first + " ";
         if (this.middle) {
-            name += this.middle_name + " ";
+            name += this.middle + " ";
         }
         name += this.last;
         if (this.suffix && this.suffix != "none") {
@@ -157,16 +157,26 @@ function fillPeopleList(list_id, allow_new, gender)
     }
 }
 
+function gotoPage(index)
+{
+    if (index < 0 || index > pageOrder.length-1) {
+        console.log("Invalid page index " + index + " requested.");
+        return;
+    }
+
+    $(pageOrder[currentPage]).hide();
+    currentPage = index;
+    $(pageOrder[currentPage]).show();
+    console.log("New page is " + pageOrder[currentPage]);
+}
+
 function nextPage()
 {
     if (currentPage >= pageOrder.length-1) {
         console.log("Can't go to next page.  Already on " + currentPage);
         return;
     }
-    $(pageOrder[currentPage]).hide();
-    currentPage++;
-    $(pageOrder[currentPage]).show();
-    console.log("New page is " + pageOrder[currentPage]);
+    gotoPage(currentPage + 1);
 }
 
 function prevPage()
@@ -175,10 +185,7 @@ function prevPage()
         console.log("Can't go to previous page.  Already on " + currentPage);
         return;
     }
-    $(pageOrder[currentPage]).hide();
-    currentPage--;
-    $(pageOrder[currentPage]).show();
-    console.log("New page is " + pageOrder[currentPage]);
+    gotoPage(currentPage - 1);
 }
 
 function startPerson()
@@ -215,4 +222,27 @@ function startPerson()
         $(id).val(person[key]);
     }
     nextPage();
+}
+
+function savePerson()
+{
+    var person = Object.create(Person);
+    for (var key in person) {
+        if (typeof person[key] == "function") {
+            continue;
+        }
+        id = "#person_" + key;
+        person[key] = $(id).val();
+        console.log("Setting " + key + "=" + person[key] + " from " + id);
+    }
+    if (currentPersonId && currentPersonId != person.id()) {
+        console.log("Deleting entry for " + currentPersonId);
+        delete peopleDB[currentPersonId];
+    }
+    peopleDB[person.id()] = person;
+    console.log("Saved entry for " + person.id());
+    currentPersonId = '';
+    fillPeopleList("#PeopleList", true, '');
+    gotoPage(0);
+    $("#thanks").show();
 }

@@ -17,7 +17,7 @@
        under the License.
  */
 
-package com.coolappz.Offline_collector;
+package org.xenth.OfflineCollector;
 
 import android.os.Bundle;
 import org.apache.cordova.*;

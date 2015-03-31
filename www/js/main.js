@@ -63,6 +63,7 @@ var Person = {
 // Global list of people
 var peopleDB = [];
 var currentPersonId = '';
+var dbFileName = 'OfflineCollector.tsv';
 
 // Pages in the editing flow
 var pageOrder = [ "#welcome", "#contact", "#mailing", "#genealogy1", "#genealogy2" ];
@@ -79,7 +80,7 @@ function onDeviceReady()
 function loadPeopleDb()
 {
     console.log("Resolving File URL");
-    var dataFile = cordova.file.externalDataDirectory + '/OfflineCollector.tsv';
+    var dataFile = cordova.file.externalDataDirectory + '/' + dbFileName;
     window.resolveLocalFileSystemURL(dataFile, gotFileEntry, fail);
 }
 
@@ -242,7 +243,48 @@ function savePerson()
     peopleDB[person.id()] = person;
     console.log("Saved entry for " + person.id());
     currentPersonId = '';
+    saveDbFile();
     fillPeopleList("#PeopleList", true, '');
     gotoPage(0);
     $("#thanks").show();
+}
+
+function saveDbFile()
+{
+    var csv = createCsvFromDb();
+    window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory, function(dirEntry) {
+        console.log("Got DirEntry: ", dirEntry);
+        dirEntry.getFile(dbFileName, {create:true}, function(fileEntry) {
+            console.log("Got FileEntry: ", fileEntry);
+            fileEntry.createWriter(function(writer) {
+                writer.write(csv);
+            });
+        });
+    });
+}
+
+function createCsvFromDb()
+{
+    // Reuse the same headers repeatedly to ensure we keep the
+    // same output for each line.
+    var person = Object.create(Person);
+    var headers = [];
+    for (var key in person) {
+        if (typeof person[key] == "function") {
+            continue;
+        }
+        headers.push(key);
+    }
+
+    var output = headers.join("\t") + "\n";
+    for (var key in peopleDB) {
+        person = peopleDB[key];
+        var fields = [];
+        for (var i=0; i<headers.length; i++) {
+            fields.push(person[headers[i]]);
+        }
+        output += fields.join("\t") + "\n";
+    }
+
+    return output;
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" id="com.coolappz.Offline_collector" version="0.0.1">
-    <name>Offline_collector</name>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" id="org.xenth.OfflineCollector" version="0.0.1">
+    <name>Offline Collector</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
+    <author email="xenth@xenth.org" href="http://www.xenth.org/">
         Apache Cordova Team
     </author>
     <content src="index.html"/>

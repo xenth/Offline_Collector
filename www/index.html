@@ -33,43 +33,42 @@
         <script src="js/vendor/modernizr.js"></script>
         <script src="js/Block_Array_HideShowClear.js"></script>
     </head>
-    <body onload="Block_Array_HideShowClear(new Array('thanks', 'contact', 'mailing', 'genealogy1', 'genealogy2'), new Array(''), 'hide');">
+    <!-- <body onload="Block_Array_HideShowClear(new Array('thanks', 'contact', 'mailing', 'genealogy1', 'genealogy2'), new Array('welcome'), 'hide');"> -->
+    <body>
     <!-- Add your site or application content here -->
     <form>
     <div class="row" id="welcome"><!-- Welcome -->
       <div class="large-8 medium-8 columns panel">
-          <h4 style="color:red" id="thanks">Thank you for contributing!  I really appreciate it!</h4>
+          <h4 style="color:red; display: none" id="thanks">Thank you for contributing!  I really appreciate it!</h4>
         <h4>Welcome to the Family Database Offline Collector!</h4>
         <p>Please choose your name from below.  If you cannot find your name, please choose "New Person" at the end of the list.</p>
             <div class="large-8 columns">
-                <label>Please select you name:</label>
-                <select>
-                    <option value="">Please Make Selection from DB</option>
-                    <option value="New Person">New Person</option>
+                <label>Please select your name:</label>
+                <select id="PeopleList">
                 </select>
             </div>
             <div class="large-4 medium-4 columns">
-                <a href="#" class="small round button" onclick="Block_Array_HideShowClear(new Array('welcome'), new Array(''), 'hide'); Block_Array_HideShowClear(new Array('contact'), new Array(''), 'show');">Enter or Update Contact Information</a>
+                <a href="#" class="small round button" onclick="startPerson()">Enter or Update Contact Information</a>
             </div>
       </div>
     </div>
-    <div class="row" id="contact"><!-- Contact -->
+    <div class="row" id="contact" style="display: none"><!-- Contact -->
       <div class="large-8 medium-8 columns panel">
         <p>Please use full legal names.  If possible, please enter your email address.</p>
             <div class="row">
               <div class="large-4 medium-4 columns">
                 <label>First Name</label>
-                <input type="text" placeholder="First" name="first" />
+                <input type="text" placeholder="First" name="first" id="person_first" />
               </div>
               <div class="large-4 medium-4 columns">
                 <label>Middle Name</label>
-                <input type="text" placeholder="Middle" name="middle"/>
+                <input type="text" placeholder="Middle" name="middle" id="person_middle"/>
               </div>
               <div class="large-4 medium-4 columns">
                 <div class="row collapse">
                   <label>Last Name</label>
                   <div class="small-9 columns">
-                    <input type="text" placeholder="Last" name="last" />
+                    <input type="text" placeholder="Last" name="last" id="person_last" />
                   </div>
                 </div>
               </div>
@@ -77,11 +76,11 @@
             <div class="row">
               <div class="large-4 medium-4 columns">
                 <label>Preferred Name</label>
-                <input type="text" placeholder="Deb, Jim, Kim, Mike, Sandy" name="used_name" />
+                <input type="text" placeholder="Deb, Jim, Kim, Mike, Sandy" name="used_name" id="person_used_name" />
               </div>
               <div class="large-4 medium-4 columns">
                 <label>Suffix</label>
-                <select name="suffix">
+                <select name="suffix" id="person_suffix">
                   <option value="">None</option>
                   <option value="I">I, Senior</option>
                   <option value="II">Junior</option>
@@ -99,7 +98,7 @@
                 <div class="row collapse">
                   <label>Maiden Name</label>
                   <div class="small-9 columns">
-                    <input type="text" placeholder="Maiden" name="maiden" />
+                    <input type="text" placeholder="Maiden" name="maiden" id="person_maiden" />
                   </div>
                 </div>
               </div>
@@ -107,38 +106,38 @@
             <div class="row">
               <div class="large-12 columns">
                 <label>Email Address (Our main method of communication)</label>
-                <input type="text" placeholder="example@company.com" name="email" />
+                <input type="text" placeholder="example@company.com" name="email" id="person_email" />
               </div>
             </div>
             <div class="large-4 medium-4 columns">
-                  <a href="#" class="small round button">Take Photo</a>
+                  <a href="#" class="small round button" onclick="takePhoto()">Take Photo</a>
             </div>
             <div class="large-4 medium-4 columns">
-                  <a href="#" class="small round button" onclick="Block_Array_HideShowClear(new Array('contact'), new Array(''), 'hide'); Block_Array_HideShowClear(new Array('mailing'), new Array(''), 'show');">Mailing Information ></a>
+                  <a href="#" class="small round button" onclick="nextPage()">Mailing Information ></a>
             </div>
       </div>
     </div>
-    <div class="row" id="mailing"><!-- Mailing Address -->
+    <div class="row" id="mailing" style="display: none"><!-- Mailing Address -->
       <div class="large-8 medium-8 columns panel">
         <p>Please enter your mailing address.</p>
             <div class="row">
               <div class="large-6 columns">
                 <label>Mailing Address 1</label>
-                <input type="text" placeholder="Mailing Address" name="add1" />
+                <input type="text" placeholder="Mailing Address" name="add1" id="person_add1" />
               </div>
               <div class="large-6 columns">
                 <label>Mailing Address 2</label>
-                <input type="text" placeholder="#4, Apartment B" name="add2" />
+                <input type="text" placeholder="#4, Apartment B" name="add2" id="person_add2" />
               </div>
             </div>
             <div class="row">
               <div class="large-4 medium-4 columns">
                 <label>City:</label>
-                <input type="text" placeholder="Metrotownshire" name="city" />
+                <input type="text" placeholder="Metrotownshire" name="city" id="person_city" />
               </div>
               <div class="large-4 medium-4 columns">
                 <label>State:</label>
-                <select name="state">
+                <select name="state" id="person_state">
                     <option value="">Choose</option>
                     <option value="AL">AL</option>
                     <option value="AK">AK</option>
@@ -197,7 +196,7 @@
                 <div class="row collapse">
                   <label>ZIP Code:</label>
                   <div class="small-9 columns">
-                    <input type="text" placeholder="55555-4444" name="zip" />
+                    <input type="text" placeholder="55555-4444" name="zip" id="person_zip" />
                   </div>
                 </div>
               </div>
@@ -206,17 +205,17 @@
                   <a href="#" class="small round button">Take Photo</a>
             </div>
             <div class="large-6 medium-6 columns">
-                  <a href="#" class="small round button"  onclick="Block_Array_HideShowClear(new Array('mailing'), new Array(''), 'hide'); Block_Array_HideShowClear(new Array('genealogy1'), new Array(''), 'show');">Genealogy Information ></a>
+                  <a href="#" class="small round button" onclick="nextPage()">Genealogy Information ></a>
             </div>
       </div>
     </div>
-    <div class="row" id="genealogy1"><!-- Genealogy 1 of 2-->
+    <div class="row" id="genealogy1" style="display: none"><!-- Genealogy 1 of 2-->
       <div class="large-8 medium-8 columns panel">
         <p>This is to capture genealogy information.  Please fill in as completely as you can.</p>
         <div class="row">
             <div class="medium-3 columns">
                 <label>Date of Birth:</label>
-                <select id="bmonth" name="bmonth">
+                <select id="bmonth" name="bmonth" id="person_bmonth">
                     <option value="01">January</option>
                     <option value="02">February</option>
                     <option value="03">March</option>
@@ -233,7 +232,7 @@
             </div>
             <div class="medium-2 columns">
                 <label>&nbsp;</label>
-                <select id="bday" name="bday">
+                <select id="bday" name="bday" id="person_bday">
                     <option value="01">01</option>
                     <option value="02">02</option>
                     <option value="03">03</option>
@@ -269,21 +268,21 @@
             </div>
             <div class="medium-2 columns">
                 <label>&nbsp;</label>
-                <select id="byear" name="byear"></select>
+                <select id="byear" name="byear" id="person_byear"></select>
             </div>
             <div class="medium-2 columns">
                 <label>&nbsp;</label>
-                <input type="text" placeholder="14:00:00" name="btime" />
+                <input type="text" placeholder="14:00:00" name="btime" id="person_btime" />
             </div>
             <div class="large-3 medium-3 columns">
               <label>Place of Birth:</label>
-              <input type="text" placeholder="Town, State, Country" name="place_of_birth" />
+              <input type="text" placeholder="Town, State, Country" name="place_of_birth" id="person_place_of_birth" />
             </div>
           </div>
           <div class="row">
             <div class="medium-3 columns">
               <label>Date of Death:</label>
-              <select id="dmonth" name="dmonth">
+              <select id="dmonth" name="dmonth" id="person_dmonth">
                   <option value="01">January</option>
                     <option value="02">February</option>
                     <option value="03">March</option>
@@ -300,7 +299,7 @@
             </div>
             <div class="medium-2 columns">
                 <label>&nbsp;</label>
-                <select id="dday" name="dday">
+                <select id="dday" name="dday" id="person_dday">
                     <option value="01">01</option>
                     <option value="02">02</option>
                     <option value="03">03</option>
@@ -336,27 +335,27 @@
             </div>
             <div class="medium-2 columns">
                 <label>&nbsp;</label>
-                <select id="dyear" name="dyear"></select>
+                <select id="dyear" name="dyear" id="person_dyear"></select>
             </div>
             <div class="medium-2 columns">
                 <label>&nbsp;</label>
-                <input type="text" placeholder="14:00:00" name="dtime" />
+                <input type="text" placeholder="14:00:00" name="dtime" id="person_dtime" />
             </div>
             <div class="large-3 medium-3 columns">
                 <label>Location</label>
-                <input type="text" placeholder="City, ST, County" name="dlocation" />
+                <input type="text" placeholder="City, ST, County" name="dlocation" id="person_dlocation" />
             </div>
           </div>
         <div class="row">
           <div class="large-6 columns">
               <label>Mother</label>
-              <select>
+              <select id="person_mother">
                   <option value="">Please Make Selection from DB</option>
               </select>
           </div>
           <div class="large-6 columns">
             <label>Father</label>
-            <select>
+            <select id="person_father">
               <option value="">Please Make Selection from DB</option>
             </select>
           </div>
@@ -364,17 +363,17 @@
                   <a href="#" class="small round button">Take Photo</a>
             </div>
             <div class="large-6 medium-6 columns">
-                  <a href="#" class="small round button" onclick="Block_Array_HideShowClear(new Array('genealogy1'), new Array(''), 'hide'); Block_Array_HideShowClear(new Array('genealogy2'), new Array(''), 'show');">Genealogy Information ></a>
+                  <a href="#" class="small round button" onclick="nextPage()">Genealogy Information ></a>
             </div>
         </div>
       </div>
     </div>
-    <div class="row" id="genealogy2"><!-- Genealogy 2 of 2-->
+    <div class="row" id="genealogy2" style="display: none"><!-- Genealogy 2 of 2-->
       <div class="large-8 medium-8 columns panel">
         <div class="row">
             <div class="large-8 medium-8 columns">
                 <label>Spouse:</label>
-                <select name="spouse">
+                <select name="spouse" id="person_spouse">
                     <option value="">Please Make Selection from DB</option>
                 </select>
             </div>
@@ -382,7 +381,7 @@
         <div class="row">
             <div class="medium-3 columns">
                 <label>Anniversary:</label>
-                <select id="amonth" name="amonth">
+                <select id="amonth" name="amonth" id="person_amonth">
                     <option value="01">January</option>
                     <option value="02">February</option>
                     <option value="03">March</option>
@@ -399,7 +398,7 @@
             </div>
             <div class="medium-2 columns">
                 <label>&nbsp;</label>
-                <select id="aday" name="aday">
+                <select id="aday" name="aday" id="person_aday">
                     <option value="01">01</option>
                     <option value="02">02</option>
                     <option value="03">03</option>
@@ -435,11 +434,11 @@
             </div>
             <div class="medium-2 columns">
                 <label>&nbsp;</label>
-                <select id="ayear" name="ayear"></select>
+                <select id="ayear" name="ayear" id="person_ayear"></select>
             </div>
             <div class="medium-2 columns">
                 <label>&nbsp;</label>
-                <input type="text" placeholder="14:00:00" name="atime" />
+                <input type="text" placeholder="14:00:00" name="atime" id="person_atime" />
             </div>
           </div>
           <div class="row">
@@ -465,6 +464,8 @@
     <script>
       $(document).foundation();
     </script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
         <!-- End your site or application content here -->
 
         <script src="js/vendor/zepto.min.js"></script>

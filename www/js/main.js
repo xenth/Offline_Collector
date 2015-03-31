@@ -3,6 +3,39 @@ $(document).ready(function() {
 });
 
 var Person = {
+    // Keep these in sync with the TSV, but order doesn't matter.
+    first: '',
+    middle: '',
+    last: '',
+    suffix: '',
+    used_name: '',
+    maiden: '',
+    email: '',
+    add1: '',
+    add2: '',
+    city: '',
+    state: '',
+    zip: '',
+    byear: '',
+    bmonth: '',
+    bday: '',
+    btime: '',
+    blocation: '',
+    dyear: '',
+    dmonth: '',
+    dday: '',
+    dtime: '',
+    dlocation: '',
+    spouse: '',
+    ayear: '',
+    amonth: '',
+    aday: '',
+    atime: '',
+    father: '',
+    mother: '',
+    gender: '',
+    notes: '',
+
     displayName: function() {
         var name = this.first + " ";
         if (this.middle) {
@@ -102,6 +135,7 @@ function parsePeopleDbFromCSV(csv)
 function fillPeopleList(list_id, allow_new, gender)
 {
     var people_list = $(list_id);
+    people_list.find('option').remove();
     people_list.append($("<option />").val("").text("Please Make Selection from DB"));
     for (var key in peopleDB) {
         if (!peopleDB.hasOwnProperty(key)) {

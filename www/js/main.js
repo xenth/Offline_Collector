@@ -303,6 +303,7 @@ function takePhoto()
     navigator.camera.getPicture(function(imageData) {
         console.log("Got photo data of size " + imageData.length);
         $("#photo").attr("src", "data:image/jpeg;base64," + imageData);
+        $("#displayPhoto").attr("src", "data:image/jpeg;base64," + imageData);
         savePhoto(imageData, person.id());
     },
     function(message) {
@@ -342,12 +343,17 @@ function base64toBlob(base64Data, contentType) {
 
 function loadPersonPhoto(person)
 {
+    $("#displayPhoto").hide();
+    $("#photo").hide();
     var imgPath = cordova.file.externalDataDirectory + '/' + person.id() + '.jpg';
+    $("#displayPhoto").attr('src', imgPath);
     $("#photo").attr('src', imgPath);
 
     window.resolveLocalFileSystemURL(imgPath, function(fileEntry) {
-        console.log("Got FileEntry: ", fileEntry);
-        fileEntry.file(function(file) {
-        });
+        // We don't load the photo data, but just use this to indicate
+        // that the images should be shown.
+        console.log("Resolved Photo FileEntry: ", fileEntry);
+        $("#displayPhoto").show();
+        $("#photo").show();
     });
 }

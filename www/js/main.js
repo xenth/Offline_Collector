@@ -141,10 +141,41 @@ function parsePeopleDbFromCSV(csv)
 
 function fillPeopleList(list_id, allow_new, gender)
 {
+    // First sort the DB.  We'll rebuild the object as we
+    // insert into the list so that we can also save in order.
+    // This isn't guaranteed by JS, but seems to be consistent
+    // in practice.
+    var keys = Object.keys(peopleDB);
+    keys.sort(function(a,b) {
+        var personA = peopleDB[a];
+        var personB = peopleDB[b];
+        if (personA.last.toLowerCase() < personB.last)
+            return -1;
+        else if (personA.last.toLowerCase() > personB.last.toLowerCase())
+            return 1;
+        else if (personA.first.toLowerCase() < personB.first.toLowerCase())
+            return -1;
+        else if (personA.first.toLowerCase() > personB.first.toLowerCase())
+            return 1;
+        else if (personA.middle.toLowerCase() < personB.middle.toLowerCase())
+            return -1;
+        else if (personA.middle.toLowerCase() > personB.middle.toLowerCase())
+            return 1;
+        else if (personA.suffix.toLowerCase() < personB.suffix.toLowerCase())
+            return -1;
+        else if (personA.suffix.toLowerCase() > personB.suffix.toLowerCase())
+            return 1;
+        else
+            return 0;
+    });
+    newDB = [];
+
     var people_list = $(list_id);
     people_list.find('option').remove();
     people_list.append($("<option />").val("").text("Please Make Selection from DB"));
-    for (var key in peopleDB) {
+    for (var i=0; i<keys.length; i++) {
+        var key = keys[i];
+        newDB[key] = peopleDB[key];
         if (!peopleDB.hasOwnProperty(key)) {
             continue;
         }
@@ -153,6 +184,7 @@ function fillPeopleList(list_id, allow_new, gender)
             people_list.append($("<option />").val(person.id()).text(person.displayName()));
         }
     }
+    peopleDB = newDB;
     if (allow_new) {
         people_list.append($("<option />").val("New Person").text("New Person"));
     }

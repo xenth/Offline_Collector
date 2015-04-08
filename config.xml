@@ -2,10 +2,10 @@
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" id="org.xenth.OfflineCollector" version="0.0.2">
     <name>Offline Collector</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        Collects family information and stores it in a tab delmited file.
     </description>
     <author email="xenth@xenth.org" href="http://www.xenth.org/">
-        Apache Cordova Team
+        Patrick Schierstein
     </author>
     <content src="index.html"/>
     <access origin="*"/>

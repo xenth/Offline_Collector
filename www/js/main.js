@@ -351,10 +351,11 @@ function savePhoto(imageData, filename)
 {
     console.log("Starting save of " + imageData.length + " bytes of image data to " + filename);
     window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory, function(dirEntry) {
-        console.log("Got DirEntry: ", dirEntry);
+        console.log("Got DirEntry: " + dirEntry);
         dirEntry.getFile(filename + '.jpg', {create:true}, function(fileEntry) {
-            console.log("Got FileEntry: ", fileEntry);
+            console.log("Got FileEntry: " + fileEntry);
             fileEntry.createWriter(function(writer) {
+                console.log("Got writer: " + writer);
                 var blob = base64toBlob(imageData, 'image/jpeg');
                 console.log("Writing " + blob.size + " bytes to file.");
                 writer.write(blob);
@@ -363,13 +364,14 @@ function savePhoto(imageData, filename)
     });
 }
 
-function base64toBlob(base64Data, contentType) {
-    var sliceSize = 1024;
-    var byteCharacters = atob(base64Data);
-    var bytes = new Array[byteCharacters.length];
+function base64toBlob(base64Data, contentType)
+{
+    var byteCharacters = window.atob(base64Data);
+    var byteNums = new Array(byteCharacters.length);
     for (var i=0; i<byteCharacters.length; i++) {
-        bytes[i] = byteCharacters[i].charCodeAt(0);
+        byteNums[i] = byteCharacters.charCodeAt(i);
     }
+    var bytes = new Uint8Array(byteNums);
     return new Blob([bytes], { type: contentType });
 }
 

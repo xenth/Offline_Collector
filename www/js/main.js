@@ -149,7 +149,7 @@ function fillPeopleList(list_id, allow_new, gender)
     keys.sort(function(a,b) {
         var personA = peopleDB[a];
         var personB = peopleDB[b];
-        if (personA.last.toLowerCase() < personB.last)
+        if (personA.last.toLowerCase() < personB.last.toLowerCase())
             return -1;
         else if (personA.last.toLowerCase() > personB.last.toLowerCase())
             return 1;

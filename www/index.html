@@ -8,18 +8,12 @@
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta http-equiv="cleartype" content="on">
 
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/touch/apple-touch-icon-144x144-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/touch/apple-touch-icon-114x114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/touch/apple-touch-icon-72x72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="img/touch/apple-touch-icon-57x57-precomposed.png">
         <link rel="shortcut icon" href="img/touch/apple-touch-icon.png">
-
-        <!-- Tile icon for Win8 (144x144 + tile color) -->
-        <meta name="msapplication-TileImage" content="img/touch/apple-touch-icon-144x144-precomposed.png">
-        <meta name="msapplication-TileColor" content="#222222">
-
 
         <!-- This script prevents links from opening in Mobile Safari. https://gist.github.com/1042026 -->
         <!--
@@ -34,34 +28,40 @@
     <body>
     <!-- Add your site or application content here -->
     <form>
-    <div class="row" id="welcome"><!-- Welcome -->
-      <div class="medium-12 columns panel">
-          <h4 style="color:red; display: none" id="thanks">Thank you for contributing!  I really appreciate it!</h4>
-        <h4>Welcome to the Family Database Offline Collector!</h4>
-        <p>Please choose your name from below.  If you cannot find your name, please choose "New Person" at the end of the list.</p>
-            <div class="medium-8 columns">
+    <div class="row panel" id="welcome"><!-- Welcome -->
+      <div class="row panel" style="display: none" id="thanks">
+        <div class="medium-12 columns">
+            <h2 style="color:red; text-align: center;">Thank you for contributing!  I really appreciate it!</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="medium-12 columns">
+            <br />&nbsp;
+            <h4>Welcome to the Family Database Offline Collector!</h4>
+            <p>Please choose your name from below.  If you cannot find your name, please choose "New Person" at the end of the list.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="medium-12 columns">
                 <label>Please select your name:</label>
                 <select id="PeopleList">
                     <option value="">Please Make Selection from DB</option>
                     <option value="New Person">New Person</option>
                 </select>
-            </div>
+        </div>
             <!--<div class="medium-4 columns">
                 <a href="#" class="small round button" onclick="loadPeopleDb()">Reload Database</a>
             </div>-->
-            <div class="medium-4 columns">
+        <div class="row">
+            <div class="medium-12 columns"><br />
                 <a href="#" class="small round button" onclick="startPerson()">Enter or Update Contact Information</a>
             </div>
+        </div>
       </div>
     </div>
-    <div class="row" id="contact" style="display: none"><!-- Contact -->
-      <div class="medium-12 columns panel">
+    <div class="row panel" id="contact" style="display: none"><!-- Contact -->
+      <div class="medium-12 columns">
         <p>Please use full legal names.  If possible, please enter your email address.</p>
-            <div class="row">
-              <div class="medium-12 columns">
-                <img id="displayPhoto" style="max-width: 200px; max-height: 200px; display: none" />
-              </div>
-            </div>
             <div class="row">
               <div class="medium-4 columns">
                 <label>First Name</label>
@@ -72,12 +72,8 @@
                 <input type="text" placeholder="Middle" name="middle" id="person_middle"/>
               </div>
               <div class="medium-4 columns">
-                <div class="row collapse">
-                  <label>Last Name</label>
-                  <div class="small-9 columns">
-                    <input type="text" placeholder="Last" name="last" id="person_last" />
-                  </div>
-                </div>
+                <label>Last Name</label>
+                <input type="text" placeholder="Last" name="last" id="person_last" />
               </div>
             </div>
             <div class="row">
@@ -90,7 +86,7 @@
                 <select name="suffix" id="person_suffix">
                   <option value="">None</option>
                   <option value="I">I, Senior</option>
-                  <option value="II">Junior</option>
+                  <option value="II">II, Junior</option>
                   <option value="III">The Third</option>
                   <option value="IV">The Fourth</option>
                   <option value="V">The Fifth</option>
@@ -102,12 +98,8 @@
                 </select>
               </div>
               <div class="medium-4 columns">
-                <div class="row collapse">
-                  <label>Maiden Name</label>
-                  <div class="small-9 columns">
-                    <input type="text" placeholder="Maiden" name="maiden" id="person_maiden" />
-                  </div>
-                </div>
+                <label>Maiden Name</label>
+                <input type="text" placeholder="Maiden" name="maiden" id="person_maiden" />
               </div>
             </div>
             <div class="row">
@@ -126,13 +118,18 @@
                 <input type="email" placeholder="example@company.com" name="email" id="person_email" />
               </div>
             </div>
-            <div class="medium-4 columns">
-                  <a href="#" class="small round button" onclick="nextPage()">Mailing Information ></a>
+            <div class="row">
+              <div class="medium-8 columns">
+                <img id="displayPhoto" src="" style="max-width: 150px; max-height: 150px; display: none" alt="Record Photo" />
+              </div>
+              <div class="medium-4 columns">
+                <a href="#" class="small round button" onclick="nextPage()">Mailing Information ></a>
+              </div>
             </div>
       </div>
     </div>
-    <div class="row" id="mailing" style="display: none"><!-- Mailing Address -->
-      <div class="medium-12 columns panel">
+    <div class="row panel" id="mailing" style="display: none"><!-- Mailing Address -->
+      <div class="medium-12 columns">
         <p>Please enter your mailing address.</p>
             <div class="row">
               <div class="medium-6 columns">
@@ -207,21 +204,20 @@
                 </select>
               </div>
               <div class="medium-4 columns">
-                <div class="row collapse">
-                  <label>ZIP Code:</label>
-                  <div class="small-9 columns">
-                    <input type="text" placeholder="55555-4444" name="zip" id="person_zip" />
-                  </div>
-                </div>
+                <label>ZIP Code:</label>
+                <input type="text" placeholder="55555-4444" name="zip" id="person_zip" />
               </div>
             </div>
-            <div class="medium-6 columns">
-                  <a href="#" class="small round button" onclick="nextPage()">Genealogy Information ></a>
+            <div class="row">
+              <div class="medium-8 columns">&nbsp;</div>
+              <div class="medium-4 columns">
+                <a href="#" class="small round button" onclick="nextPage()">Genealogy Information ></a>
+              </div>
             </div>
       </div>
     </div>
-    <div class="row" id="genealogy1" style="display: none"><!-- Genealogy 1 of 2-->
-      <div class="medium-12 columns panel">
+    <div class="row panel" id="genealogy1" style="display: none"><!-- Genealogy 1 of 2-->
+      <div class="medium-12 columns">
         <p>This is to capture genealogy information.  Please fill in as completely as you can.</p>
         <div class="row">
             <div class="medium-3 columns">
@@ -291,7 +287,7 @@
         <div class="row">
             <div class="medium-12 columns">
               <label>Place of Birth:</label>
-              <input type="text" placeholder="Town, State, Country" name="place_of_birth" id="person_blocation" />
+              <input type="text" placeholder="City, County, State, Country" name="place_of_birth" id="person_blocation" />
             </div>
         </div>
         <div class="row">
@@ -362,7 +358,7 @@
         <div class="row">
             <div class="medium-12 columns">
                 <label>Location of Death</label>
-                <input type="text" placeholder="City, ST, County" name="dlocation" id="person_dlocation" />
+                <input type="text" placeholder="City, County, State, Country" name="dlocation" id="person_dlocation" />
             </div>
           </div>
         <div class="row">
@@ -378,14 +374,15 @@
           </div>
         </div>
         <div class="row">
-            <div class="medium-6 columns">
-                  <a href="#" class="small round button" onclick="nextPage()">More Genealogy ></a>
+            <div class="medium-8 columns">&nbsp;</div>
+            <div class="medium-4 columns">
+                <a href="#" class="small round button" onclick="nextPage()">More Genealogy ></a>
             </div>
         </div>
       </div>
     </div>
-    <div class="row" id="genealogy2" style="display: none"><!-- Genealogy 2 of 2-->
-      <div class="medium-12 columns panel">
+    <div class="row panel" id="genealogy2" style="display: none"><!-- Genealogy 2 of 2-->
+      <div class="medium-12 columns">
         <div class="row">
             <div class="medium-12 columns">
                 <label>Spouse:</label>
@@ -452,7 +449,7 @@
             </div>
             <div class="medium-4 columns">
                 <label>&nbsp;</label>
-                <input type="number" name="ayear" id="person_ayear" min="1850" max="2015"></select>
+                <input type="number" name="ayear" id="person_ayear" min="1850" max="2015">
             </div>
             <div class="medium-2 columns">
                 <label>&nbsp;</label>
@@ -462,15 +459,16 @@
           <div class="row">
             <div class="medium-12 columns">
               <label>Notes</label>
-              <textarea placeholder="Place married, interesting story, little known facts" name="notes" id="person_notes"></textarea>
+              <!--<textarea placeholder="Place married, interesting story, little known facts, Cause of Death" name="notes" id="person_notes"></textarea>-->
+              <input type="text" placeholder="Place married, interesting story, little known facts, Cause of Death" name="notes" id="person_notes" />
             </div>
           </div>
           <div class="row">
               <div class="medium-4 columns">
-                  <img id="photo" style="max-width: 200px; max-height: 200px" />
+                  <button type="button" onclick="takePhoto()"><img src="img/camera.png" width="148" alt="Take Photo"></button>
               </div>
               <div class="medium-4 columns">
-                  <button type="button" onclick="takePhoto()"><img src="img/camera.png" width="148"></button>
+                  <img id="photo" style="max-width: 200px; max-height: 200px" alt="Record Photo"/>
               </div>
               <div class="medium-4 columns">
                   <a href="#" class="small round button" onclick="savePerson()">Save Information</a>
@@ -491,13 +489,5 @@
 
         <script src="js/vendor/zepto.min.js"></script>
         <script src="js/helper.js"></script>
-
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            var _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"]];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
-            g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
-            s.parentNode.insertBefore(g,s)}(document,"script"));
-        </script>
     </body>
 </html>
